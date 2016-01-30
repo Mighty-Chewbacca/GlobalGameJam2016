@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TotemItemSelectedScript : MonoBehaviour 
+public class strengthItemSelectedScript : MonoBehaviour 
 {
-	//this script will run when a totem item is clicked, it will then push it into the first available totem slot.
-	// Use this for initialization
+	public GameObject totemObject;
 	public TotemScript totemController;
 	public string itemType = "itemtest";
 	public Sprite mySprite;
-	public string itemEffect;
 	public string itemStrength;
 
-	public static bool wheelActive = false;
 
-	//we need a totem item - so that we can push to it
-	//we need a type that is this item
+	// Use this for initialization
 	void Start () 
 	{
-		
+		totemObject = GameObject.Find ("totemcontroller");
+		totemController = totemObject.GetComponent<TotemScript> ();
 	}
 	
 	// Update is called once per frame
@@ -32,6 +29,8 @@ public class TotemItemSelectedScript : MonoBehaviour
 		//the item has been clicked
 		//now we put it into the first available slot in the totem
 
-		//totemController.setNextItem(itemType, mySprite);
+		totemController.setStrength (itemStrength, mySprite);
+		Destroy (this.gameObject.transform.parent.gameObject);
+		TotemItemSelectedScript.wheelActive = false;
 	}
 }
