@@ -5,7 +5,6 @@ public class effectItemSelectedScript : MonoBehaviour
 {
 	public GameObject totemObject;
 	public TotemScript totemController;
-	public string itemType = "itemtest";
 	public Sprite mySprite;
 	public string itemEffect;
 

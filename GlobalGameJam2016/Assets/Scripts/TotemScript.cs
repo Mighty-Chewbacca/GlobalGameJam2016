@@ -20,23 +20,24 @@ public class TotemScript : MonoBehaviour
 	public Sprite happy, meh, sad;
 
 	public static int villageScore = 0;
+	public int villageScoreTemp;
 
 	public int currentPuzzle = 0;
 
 	// Use this for initialization
 	void Start () 
 	{
-		puzzleEffectSolutions [0] = "rock";
-		puzzleEffectSolutions [1] = "skull";
-		puzzleEffectSolutions [2] = "skull";
-		puzzleEffectSolutions [3] = "owl";
-		puzzleEffectSolutions [4] = "rock";
+		puzzleEffectSolutions [0] = "rain";
+		puzzleEffectSolutions [1] = "sun";
+		puzzleEffectSolutions [2] = "food";
+		puzzleEffectSolutions [3] = "breeze";
+		puzzleEffectSolutions [4] = "heat";
 
-		puzzleStrengthSolutions [0] = "rock";
-		puzzleStrengthSolutions [1] = "rock";
-		puzzleStrengthSolutions [2] = "shoe";
-		puzzleStrengthSolutions [3] = "log";
-		puzzleStrengthSolutions [4] = "shoe";
+		puzzleStrengthSolutions [0] = "weak";
+		puzzleStrengthSolutions [1] = "strong";
+		puzzleStrengthSolutions [2] = "weak";
+		puzzleStrengthSolutions [3] = "strong";
+		puzzleStrengthSolutions [4] = "strong";
 
 		source = GetComponent<AudioSource> ();
 	}
@@ -44,6 +45,8 @@ public class TotemScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		villageScoreTemp = TotemScript.villageScore;
+
 		if (currentPuzzle == 0) 
 		{
 			TotemScript.desiredEffect = puzzleEffectSolutions [0];

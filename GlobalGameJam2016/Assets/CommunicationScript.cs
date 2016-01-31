@@ -8,7 +8,7 @@ public class CommunicationScript : MonoBehaviour
 	public Vector2 objectPos;
 	public GUISkin mySkin;
 	public bool alignLeft;
-	public Texture villagetex, strengthtex, effecttex, rocktex, owltex, shoetex, skulltex, logtex;
+	public Texture villagetex, strengthtex, effecttex, heattex, raintex, suntex, foodtex, breezetex, strongtex, weaktex;
 	public bool forceShow;
 	public bool isTaskGiver;
 
@@ -31,46 +31,34 @@ public class CommunicationScript : MonoBehaviour
 	{
 		if (isTaskGiver) 
 		{
-			if (TotemScript.desiredEffect == "rock") 
+			if (TotemScript.desiredEffect == "food") 
 			{
-				effecttex = rocktex;
+				effecttex = foodtex;
 			}
-			if (TotemScript.desiredEffect == "owl") 
+			if (TotemScript.desiredEffect == "breeze") 
 			{
-				effecttex = owltex;
+				effecttex = breezetex;
 			}
-			if (TotemScript.desiredEffect == "log") 
+			if (TotemScript.desiredEffect == "heat") 
 			{
-				effecttex = logtex;
+				effecttex = heattex;
 			}
-			if (TotemScript.desiredEffect == "shoe") 
+			if (TotemScript.desiredEffect == "sun") 
 			{
-				effecttex = shoetex;
+				effecttex = suntex;
 			}
-			if (TotemScript.desiredEffect == "skull") 
+			if (TotemScript.desiredEffect == "rain") 
 			{
-				effecttex = skulltex;
+				effecttex = raintex;
 			}
 
-			if (TotemScript.desiredStrength == "rock") 
+			if (TotemScript.desiredStrength == "strong") 
 			{
-				strengthtex = rocktex;
+				strengthtex = strongtex;
 			}
-			if (TotemScript.desiredStrength == "owl") 
+			if (TotemScript.desiredStrength == "weak") 
 			{
-				strengthtex = owltex;
-			}
-			if (TotemScript.desiredStrength == "log") 
-			{
-				strengthtex = logtex;
-			}
-			if (TotemScript.desiredStrength == "shoe") 
-			{
-				strengthtex = shoetex;
-			}
-			if (TotemScript.desiredStrength == "skull") 
-			{
-				strengthtex = skulltex;
+				strengthtex = weaktex;
 			}
 		}
 	}
