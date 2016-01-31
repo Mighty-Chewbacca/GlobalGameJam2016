@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TotemScript : MonoBehaviour 
 {
 	//this script will represent the totem pole
 	//it will hold the items that have already been selected (5 items for now)
 
-	public GameObject effectItem, strengthItem;
+	public GameObject effectItem, strengthItem, finalItem;
 	public int currentItem = 1;
 	public string itemEffect, itemStrength;
 	public static string desiredEffect, desiredStrength;
 	public string[] puzzleEffectSolutions = new string[5];
 	public string[] puzzleStrengthSolutions = new string[5];
+	public GameObject gameOverPanel;
 
 	private AudioSource source;
 	public AudioClip goodSound, badSound;
+
+	public Sprite sun, heat, rain, food, breeze;
 
 	public GameObject villageFace;
 	public Sprite happy, meh, sad;
@@ -40,6 +44,7 @@ public class TotemScript : MonoBehaviour
 		puzzleStrengthSolutions [4] = "strong";
 
 		source = GetComponent<AudioSource> ();
+		gameOverPanel.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -91,6 +96,8 @@ public class TotemScript : MonoBehaviour
 		if (currentPuzzle > 4) 
 		{
 			//win message
+			gameOverPanel.SetActive(true);
+			gameOverPanel.gameObject.GetComponent<UnityEngine.UI.Text>().text = endGame();
 		}
 	}
 
@@ -115,6 +122,31 @@ public class TotemScript : MonoBehaviour
 
 	public void CheckTotemPole()
 	{
+		//draw the chosen rune in the slot
+		if (itemEffect == "sun")
+			finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = sun;
+
+		if (itemEffect == "rain")
+			finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = rain;
+
+		if (itemEffect == "heat")
+			finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = heat;
+
+		if (itemEffect == "breeze")
+			finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = breeze;
+
+		if (itemEffect == "food")
+			finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = food;
+
+		//System.Threading.Thread.Sleep (2000);
+		//StartCoroutine(waitPlease());
+
+		print ("starting" + Time.time);
+		StartCoroutine (waitPlease(2.0f));
+		print("before wait and print finished");
+
+
+
 		if (itemEffect == TotemScript.desiredEffect && itemStrength == TotemScript.desiredStrength) 
 		{
 			//got the correct combination
@@ -130,6 +162,29 @@ public class TotemScript : MonoBehaviour
 			TotemScript.villageScore += 3;
 			source.PlayOneShot (badSound);
 			currentPuzzle++;
+		}
+	}
+
+	IEnumerator waitPlease(float waitTime)
+	{
+		yield return new WaitForSeconds (waitTime);
+		print ("wait and print" + Time.time);
+		finalItem.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+	}
+
+	public string endGame()
+	{
+		if (villageScore > 2) 
+		{
+			return "Boo! you ruined the village.";
+		} 
+		else if (villageScore < -2)
+		{
+			return "Well done, the village is pleased!";
+		}
+		else
+		{
+			return "You left the village as you arrived - no difference.";
 		}
 	}
 }
